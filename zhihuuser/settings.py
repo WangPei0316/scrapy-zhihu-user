@@ -94,7 +94,7 @@ ITEM_PIPELINES = {
 
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
-REDIS_URL = 'redis://user:pass@hostname:9001'
+REDIS_URL = 'redis://root:2012haiaini@60.205.203.183:6379'
 
 MONGO_URI = 'localhost'
 MONGO_DATABASE = 'zhihu'
