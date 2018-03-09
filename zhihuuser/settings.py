@@ -54,9 +54,13 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'zhihuuser.middlewares.MyCustomDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+    'zhihuuser.middlewares.RandomUserAgentMiddleware': 544,
+   'zhihuuser.middlewares.ZhihuuserSpiderMiddleware': 543,
+   'zhihuuser.middlewares.ProxyMiddleware': 545,
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+
+}
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
