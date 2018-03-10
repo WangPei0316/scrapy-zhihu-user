@@ -55,9 +55,9 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
+    'zhihuuser.middlewares.ProxyMiddleware': 100,
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 130,
     'zhihuuser.middlewares.RandomUserAgentMiddleware': 544,
-   'zhihuuser.middlewares.ZhihuuserSpiderMiddleware': 543,
-   'zhihuuser.middlewares.ProxyMiddleware': 545,
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
 
 }
@@ -95,6 +95,9 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+RETRY_ENABLED = True
+RETRY_TIMES = 5
 
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"

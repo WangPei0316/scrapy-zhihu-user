@@ -4,7 +4,7 @@
 #
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
-from random import random
+import random
 import requests
 
 from fake_useragent import UserAgent
@@ -62,7 +62,7 @@ class RandomUserAgentMiddleware(object):
     def __init__(self,crawler):
         super(RandomUserAgentMiddleware,self).__init__()
         self.ua = UserAgent()
-        self.ua_type = crawler.setting.get('RANDOM_UA_TYPE','random')
+        self.ua_type = crawler.settings.get('RANDOM_UA_TYPE','random')
 
     @classmethod
     def from_crawler(cls,crawler):
@@ -74,17 +74,19 @@ class RandomUserAgentMiddleware(object):
         request.headers.setdefault('User-Agent',get_ua())
 
 class ProxyMiddleware(object):
+    s = requests.session()
+    s.keep_alive = False
     def __init__(self):
-        self.url = "http://0.0.0.1:8000/?types=0&count=10&country=%E5%9B%BD%E5%86%85"
+        self.url = "http://0.0.0.0:8888/?types=0&count=10&country=%E5%9B%BD%E5%86%85"
         self.proxy = eval(requests.get(self.url).content)
         self.counts = 0
-        def process_request(self,request,spider):
-        #这里作一个计数器,在访问次数超过1000次之后就切换一批(10个)高匿代理,使得代理一直保持最新的状态
-            if self.counts < 500:
-                pre_proxy = random.choice(self.proxy)
-                request.meta['proxy'] = 'http://{}'.format(str(pre_proxy[0])+":"+str(pre_proxy[1]))
-                self.counts += 1
-            else:
-                #进入到这里的这一次就不设定代理了,直接使用本机ip访问
-                self.counts = 0
-                self.proxy = eval(requests.get(self.url).content)
+    def process_request(self,request,spider):
+    #这里作一个计数器,在访问次数超过500次之后就切换一批(10个)高匿代理,使得代理一直保持最新的状态
+        if self.counts < 500:
+            pre_proxy = random.choice(self.proxy)
+            request.meta['proxy'] = 'http://{}'.format(str(pre_proxy[0])+":"+str(pre_proxy[1]))
+            self.counts += 1
+        else:
+            #进入到这里的这一次就不设定代理了,直接使用本机ip访问
+            self.counts = 0
+            self.proxy = eval(requests.get(self.url).content)
