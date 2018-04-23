@@ -74,6 +74,7 @@ class RandomUserAgentMiddleware(object):
             return getattr(self.ua, self.ua_type)
 
         request.headers.setdefault('User-Agent', get_ua())
+        request.headers.setdefault('authorization', 'oauth c3cef7c66a1843f8b3a9e6a1e3160e20')
 
 
 # #  自定义代理中间件(阿布云)
@@ -92,8 +93,6 @@ class RandomUserAgentMiddleware(object):
 
 #  自定义代理中间件(此处使用蘑菇代理，可以自己修改和匹配)
 class ProxyMiddleware(object):
-    s = requests.session()
-    s.keep_alive = False
 
     def __init__(self):
         self.url = "http://piping.mogumiao.com/proxy/api/get_ip_al?appKey=91a4450c3b98477bcfead8c060db8d&count=10&expiryDate=5&format=2"
