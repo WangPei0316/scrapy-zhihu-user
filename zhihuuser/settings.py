@@ -104,3 +104,5 @@ REDIS_URL = ''  # 此处修改为你需要存储的redis地址，‘redis://user
 
 MONGO_URI = 'localhost'
 MONGO_DATABASE = 'zhihu'
+MONGO_USERNAME = ''
+MONGO_PWD = ''
