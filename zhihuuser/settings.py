@@ -102,6 +102,10 @@ SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 REDIS_URL = ''  # 此处修改为你需要存储的redis地址，‘redis://user:pwd@IP:port’
 
+RANDOM_UA_TYPE = 'random'
+
+# CLOSESPIDER_TIMEOUT = 600
+
 MONGO_URI = 'localhost'
 MONGO_DATABASE = 'zhihu'
 MONGO_USERNAME = ''
