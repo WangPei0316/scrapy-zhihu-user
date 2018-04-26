@@ -32,7 +32,7 @@ ROBOTSTXT_OBEY = False
 # CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-# COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 # TELNETCONSOLE_ENABLED = False
@@ -103,7 +103,8 @@ DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 REDIS_URL = ''  # 此处修改为你需要存储的redis地址，‘redis://user:pwd@IP:port’
 
 RANDOM_UA_TYPE = 'random'
-
+LOG_LEVEL = 'INFO'
+DOWNLOAD_TIMEOUT = 15
 # CLOSESPIDER_TIMEOUT = 600
 
 MONGO_URI = 'localhost'
