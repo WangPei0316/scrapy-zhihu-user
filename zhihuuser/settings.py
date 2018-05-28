@@ -32,7 +32,6 @@ ROBOTSTXT_OBEY = False
 # CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 # TELNETCONSOLE_ENABLED = False
@@ -71,7 +70,6 @@ DOWNLOADER_MIDDLEWARES = {
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'zhihuuser.pipelines.MongoPipeline': 300,
-    # 'scrapy_redis.pipelines.RedisPipeline': 301,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -95,6 +93,8 @@ ITEM_PIPELINES = {
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
+
+COOKIES_ENABLED = False
 RETRY_ENABLED = True
 RETRY_TIMES = 5
 
@@ -107,7 +107,7 @@ LOG_LEVEL = 'INFO'
 DOWNLOAD_TIMEOUT = 15
 # CLOSESPIDER_TIMEOUT = 600
 
-MONGO_URI = 'localhost'
+MONGO_URI = ''
 MONGO_DATABASE = 'zhihu'
 MONGO_USERNAME = ''
 MONGO_PWD = ''

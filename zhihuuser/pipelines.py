@@ -1,4 +1,5 @@
 import pymongo
+from pymongo.errors import DuplicateKeyError
 
 
 class MongoPipeline(object):
@@ -23,10 +24,16 @@ class MongoPipeline(object):
         self.client[self.mongo_db].authenticate(self.mongo_username, self.mongo_pwd, self.mongo_db,
                                                 mechanism='SCRAM-SHA-1')
         self.db = self.client[self.mongo_db]
+        self.collection = self.db['user']
+        self.collection.create_index('url_token',unique=True)
 
     def close_spider(self, spider):
         self.client.close()
 
     def process_item(self, item, spider):
-        self.db['user'].update({'url_token': item['url_token']}, {'$set': item}, True)
-        return item
+        try:
+            self.collection.insert_one(dict(item))
+            return item
+        except DuplicateKeyError:
+            spider.logger.debug(' duplicate key error collection')
+            return item
